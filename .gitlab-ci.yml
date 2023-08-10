@@ -17,7 +17,7 @@ stages:
       - merge_requests
       - schedules
       - web
-      - master
+      - main
   except:
     variables:
       - $CI_MERGE_REQUEST_LABELS =~ /(^|,)no-ci-needed($|,)/
@@ -82,7 +82,7 @@ test-pages:
   stage: stage1
   except:
       refs:
-      - master
+      - main
   script:
     - pip install -v -e ".[docs]"
     - cd docs && pwd && ls -l conf.py && sh make_docs.sh && cd ..
@@ -101,7 +101,7 @@ pages:
   stage: stage2
   only:
     refs:
-      - master
+      - main
   script:
     - pip install -v -e ".[docs]"
     - cd docs && pwd && ls -l conf.py && sh make_docs.sh && cd ..
