@@ -1,0 +1,29 @@
+# should cover dependencies of
+#   pip install -e .[ci]
+name: optson
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - numpy
+  - h5py
+  - ipython
+  - ipympl
+  - matplotlib
+  - scikit-learn
+  - pytest=7.4.0
+  - pytest-cov
+  - mypy=1.4.1
+  - flake8=6.0.0
+  - black=23.7.0
+  - jupyter
+  - jupytext
+  - sphinx
+  - make
+  - arrow
+  - jinja2-time
+  - pip
+  - pip:
+      - myst_nb
+      - sphinx_book_theme

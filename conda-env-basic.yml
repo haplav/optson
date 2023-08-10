@@ -1,0 +1,10 @@
+# should cover dependencies of
+#   pip install -e .
+name: optson
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - numpy
+  - h5py

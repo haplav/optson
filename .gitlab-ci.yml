@@ -1,0 +1,113 @@
+stages:
+  - initial
+  - stage0
+  - stage1
+  - stage2
+
+.job:
+  image: $CI_REGISTRY_IMAGE:ci
+  interruptible: true
+  when: on_success
+
+.mr_job:
+  extends: .job
+  only:
+    refs:
+      - api
+      - merge_requests
+      - schedules
+      - web
+      - master
+  except:
+    variables:
+      - $CI_MERGE_REQUEST_LABELS =~ /(^|,)no-ci-needed($|,)/
+      - $CI_MERGE_REQUEST_LABELS =~ /(^|,)no-pytest-needed($|,)/
+  allow_failure: false
+
+noop:
+  extends: .job
+  stage: initial
+  script: "# noop job - nothing to be done!"
+  variables:
+    GIT_STRATEGY: none
+  only:
+    refs:
+      - merge_requests
+    variables:
+      - $CI_MERGE_REQUEST_LABELS =~ /(^|,)no-ci-needed($|,)/
+  allow_failure: true
+
+static-checks:
+  extends: .mr_job
+  stage: stage0
+  script:
+    - source ci/test-commons.sh
+    - pip install -v -e ".[test]"
+    - check_versions
+    - run_static_checks
+
+pytest:
+  extends: .mr_job
+  stage: stage1
+  script:
+    - source ci/test-commons.sh
+    - pip install -v -e ".[test]"
+    - run_pytest
+  coverage: '/(?i)total.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/'
+
+jax:
+  extends: pytest
+  image: $CI_REGISTRY_IMAGE:ci-jax
+  script:
+    - source ci/test-commons.sh
+    - pip install -v -e ".[test,jax]"
+    - run_pytest
+
+torch:
+  extends: pytest
+  image: $CI_REGISTRY_IMAGE:ci-torch
+  script:
+    - source ci/test-commons.sh
+    - pip install -v -e ".[test,torch]"
+    - run_pytest
+
+salvus-deps:
+  extends: pytest
+  image: $CI_REGISTRY_IMAGE:ci-salvus-deps
+  variables:
+    ENV_NAME: 'salvus'
+
+test-pages:
+  extends: .mr_job
+  stage: stage1
+  except:
+      refs:
+      - master
+  script:
+    - pip install -v -e ".[docs]"
+    - cd docs && pwd && ls -l conf.py && sh make_docs.sh && cd ..
+
+test-pages-without-pytest:
+  extends: test-pages
+  except:
+    variables:
+      - $CI_MERGE_REQUEST_LABELS =~ /(^|,)no-ci-needed($|,)/
+  only:
+    variables:
+      - $CI_MERGE_REQUEST_LABELS =~ /(^|,)no-pytest-needed($|,)/
+
+pages:
+  extends: .mr_job
+  stage: stage2
+  only:
+    refs:
+      - master
+  script:
+    - pip install -v -e ".[docs]"
+    - cd docs && pwd && ls -l conf.py && sh make_docs.sh && cd ..
+    - mkdir .public
+    - cp -r docs/_build/html/* .public/
+    - mv .public public
+  artifacts:
+    paths:
+      - public

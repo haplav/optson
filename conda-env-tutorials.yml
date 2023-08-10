@@ -1,0 +1,14 @@
+# should cover dependencies of
+#   pip install -e .[tutorials]
+name: optson
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - numpy
+  - h5py
+  - ipython
+  - ipympl
+  - matplotlib
+  - scikit-learn

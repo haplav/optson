@@ -1,0 +1,10 @@
+FROM mambaorg/micromamba:1.4-jammy
+ARG MAMBA_DOCKERFILE_ACTIVATE=1
+USER root
+RUN apt-get update -y && \
+    apt-get install -y curl && \
+    apt-get clean
+USER mambauser
+RUN curl https://mondaic.com/environment-py39.yml -o environment.yml && \
+    micromamba env create -f environment.yml && \
+    micromamba clean --all --yes

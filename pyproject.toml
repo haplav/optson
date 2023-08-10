@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools", "wheel", "setuptools_scm", "versioneer[toml]"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["optson"]  # package names should match these glob patterns (["*"] by default)
+
+
+[project]
+name = "optson"
+dynamic =["version" ]
+requires-python = ">=3.7"
+description = "Optson: package for unconstrained optimization"
+license = {file="LICENSE"}
+authors = [
+     {name = "Dirk Philip van Herwaarden", email = "dirkphilip.vanherwaarden@erdw.ethz.ch"},
+     {name = "Vaclav Hapla", email = "vaclav.hapla@erdw.ethz.ch"},
+]
+readme = "README.md"
+classifiers = [
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "License :: OSI Approved :: MIT License",
+]
+
+dependencies = ["numpy", "h5py", "matplotlib"]
+
+[project.optional-dependencies]
+tutorials = ["ipympl", "scikit-learn"]
+jax = ["jax", "jaxlib"] # Support for Jax.Arrays
+torch = ["torch"] # Support for Torch.Tensor
+test = ["optson[tutorials]", "pytest", "pytest-cov", "mypy", "flake8"]
+docs = ["sphinx", "myst_nb", "sphinx_book_theme", "make"]
+all = ["optson[ci, jax, torch]"]
+
+[tool.versioneer]
+VCS = "git"
+style = "pep440"
+versionfile_source = "_version.py"
+parentdir_prefix = ""
+
+[[tool.mypy.overrides]]
+module = [
+    "torch.*",
+    "jax.*",
+    "jaxlib.*",
+    "h5py.*",
+]
+ignore_missing_imports = true
