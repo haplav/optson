@@ -85,7 +85,10 @@ test-pages:
       - main
   script:
     - pip install -v -e ".[docs]"
-    - cd docs && pwd && ls -l conf.py && sh make_docs.sh && cd ..
+    - cd docs && pwd && ls -l conf.py && sh make_docs.sh
+  artifacts:
+    paths:
+      - docs/_build/html/
 
 test-pages-without-pytest:
   extends: test-pages
