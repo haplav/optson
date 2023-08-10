@@ -1,7 +1,7 @@
 # Optson: A Flexible Optimization Toolbox
 
-[![pipeline](https://gitlab.com/swp_ethz/projects/inversionson/optson/badges/master/pipeline.svg)]()
-[![coverage](https://gitlab.com/swp_ethz/projects/inversionson/optson/badges/master/coverage.svg)]()
+[![pipeline](https://gitlab.com/swp_ethz/optson/badges/main/pipeline.svg)]()
+[![coverage](https://gitlab.com/swp_ethz/optson/badges/main/coverage.svg)]()
 
 ## Summary
 
@@ -11,6 +11,8 @@
 * A user can define a sublass of the `Problem` class and provide implementations of `f()` (misfit) and `g()` (gradient).
 * An instance of this class as well as an initial model are then passed to Optson, after which Optson will
 perform optimization according to the specified settings.
+
+Full documentation: https://swp_ethz.gitlab.io/optson
 
 ## Installation
 * Make sure you have an environment with Python version 3.9 or higher.  
