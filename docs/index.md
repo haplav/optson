@@ -5,6 +5,7 @@
 Installation<installation>
 Tutorials<tutorial>
 API Reference<api/modules>
+Source on GitLab<https://gitlab.com/swp_ethz/optson>
 ```
 
 # Welcome to Optson!
