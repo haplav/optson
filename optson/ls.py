@@ -312,7 +312,8 @@ class BacktrackingLSStepsize(LSStepsize):
         if not self.verbose:
             return
         print(
-            f"    {i:3d} {nEval:3d} L phi(x) = {phi:+.8e} {' >' if phi > l else '<='} l(x) = {l:+.8e} alpha = {alpha:+.8e}"
+            f"    {i:3d} {nEval:3d} L phi(x) = {float(phi):+.8e} {' >' if phi > l else '<='} "
+            f"l(x) = {float(l):+.8e} alpha = {float(alpha):+.8e}"
         )
 
 
