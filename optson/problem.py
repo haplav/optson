@@ -54,6 +54,7 @@ class Problem(ABC):
         indices: Optional[List[int]],
     ) -> Vec:
         """Compute gradient of the model vector with respect to the objective function.
+        Implementor can rely on the fact that f() is evaluated prior to g() - see `Model.gx`.
 
         Args:
             model (ModelProxy): The ModelProxy object.
