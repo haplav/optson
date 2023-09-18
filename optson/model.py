@@ -149,10 +149,13 @@ class Model(ModelProxy):
     @cached_property
     def gx(self) -> Vec:
         """The (mini-batch) gradient of the current model.
+        Evaluates `Model.fx` on first evaluation.
+        This is to avoid issues with uninitialized stuff if `Model.gx` is used prior to `Model.fx` in some algorithms.
 
         Returns:
             Vec: The gradient.
         """
+        self.fx
         return self._problem.g(self, self.batch)
 
     @cached_property
