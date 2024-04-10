@@ -116,7 +116,7 @@ pages:
     - cd docs && pwd && ls -l conf.py
     - sphinx-apidoc -o api ../optson -f -H "API Reference" -e
     - sphinx-build -M html . _build -T -W
-    - cp -rvT docs/_build/html ../public
+    - cp -rvT _build/html ../public
   artifacts:
     paths:
       - public
