@@ -85,10 +85,16 @@ test-pages:
       - main
   script:
     - pip install -v -e ".[docs]"
-    - cd docs && pwd && ls -l conf.py && sh make_docs.sh
+    - cd docs && pwd && ls -l conf.py
+    - sphinx-apidoc -o api ../optson -f -H "API Reference" -e
+    - sphinx-build -M html . _build -T -W
+
   artifacts:
+    access: 'developer'
     paths:
-      - docs/_build/html/
+      - docs/api/
+      - docs/_build/
+    when: on_failure
 
 test-pages-without-pytest:
   extends: test-pages
@@ -107,10 +113,11 @@ pages:
       - main
   script:
     - pip install -v -e ".[docs]"
-    - cd docs && pwd && ls -l conf.py && sh make_docs.sh && cd ..
-    - mkdir .public
-    - cp -r docs/_build/html/* .public/
-    - mv .public public
+    - cd docs && pwd && ls -l conf.py
+    - sphinx-apidoc -o api ../optson -f -H "API Reference" -e
+    - sphinx-build -M html . _build -T -W
+    - cp -rvT docs/_build/html ../public
   artifacts:
     paths:
       - public
+    when: on_success
