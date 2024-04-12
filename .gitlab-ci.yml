@@ -79,7 +79,7 @@ salvus-deps:
 
 test-pages:
   extends: .mr_job
-  stage: stage1
+  stage: stage2
   except:
       refs:
       - main
