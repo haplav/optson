@@ -3,6 +3,7 @@ or trust-region approaches can only be used either without using mini-batches or
 such as provided by the `ControlGroupBatchManager`.
 
 """
+
 # This simplifies imports of different methods, e.g.
 # from optson.methods import *
 # from optson.methods import AdamUpdate, QuasiNewtonUpdate, SteepestDescentUpdate, BasicTRUpdate

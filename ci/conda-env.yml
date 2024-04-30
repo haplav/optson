@@ -14,9 +14,9 @@ dependencies:
   - scikit-learn
   - pytest=7.4.0
   - pytest-cov
-  - mypy=1.4.1
-  - flake8=6.0.0
-  - black=23.7.0
+  - mypy=1.10.0
+  - flake8=7.0.0
+  - black=24.4.2
   - jupyter
   - jupytext
   - sphinx
