@@ -1,0 +1,31 @@
+{
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "cSpell.words": [
+        "allclose",
+        "ared",
+        "astype",
+        "Deques",
+        "dtype",
+        "Himmelblau",
+        "Hinv",
+        "issubdtype",
+        "LBFGS",
+        "loglog",
+        "ndarray",
+        "Nocedal",
+        "numel",
+        "Rosenbrock",
+        "tensordot",
+        "tobytes",
+        "Vecs",
+        "xlabel",
+        "ylabel"
+    ],
+    "mypy-type-checker.importStrategy": "fromEnvironment",
+    "flake8.importStrategy": "fromEnvironment",
+    "black-formatter.importStrategy": "fromEnvironment",
+}
