@@ -50,3 +50,10 @@ module = [
     "h5py.*",
 ]
 ignore_missing_imports = true
+
+[tool.flake8]
+count = true
+ignore = ['E203', 'E741', 'W503']
+max-line-length = 127
+show-source = true
+statistics = true

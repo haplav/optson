@@ -47,7 +47,7 @@ run_static_checks () {(
     set -ex
 
     black . --check
-    flake8 . --count --max-line-length=127 --show-source --statistics --ignore=E741,W503,E203
+    flake8 .
     mypy optson/ docs/jupytext_notebooks/
 )}
 
