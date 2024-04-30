@@ -78,21 +78,21 @@ class RegressionProblem(Problem):
 
 # %% [markdown]
 # ## Gradient testing the problem
-# We test if we correctly computed the gradient, if this is the case, we should see a hockerstick shaped graph
+# We test if we correctly computed the gradient, if this is the case, we should see a hockey stick shaped graph
 #
 # %%
 h = np.logspace(-10, 3, 15)
-grdtest = GradientTest(
+grad_test = GradientTest(
     x0=np.zeros(2),
     h=h,
     problem=RegressionProblem(n_samples=n_samples),
     batch_manager=ControlGroupBatchManager(n_samples=n_samples),
 )
-grdtest.plot()
-print(f"Minimum error: {min(grdtest.relative_errors):.2e}")
+grad_test.plot()
+print(f"Minimum error: {min(grad_test.relative_errors):.2e}")
 
 # %% [markdown]
-# ## Standard non-stochastic L-BFGS
+# ## Standard non-stochastic LBFGS
 
 # %%
 sc = BasicStoppingCriterion(tolerance=1e-6, max_iterations=200)

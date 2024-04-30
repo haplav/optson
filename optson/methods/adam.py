@@ -6,7 +6,7 @@ from typing import Optional, Union
 
 import h5py
 
-from ..ls import LSDirection, ConstantLSStepsize
+from ..ls import LSDirection, ConstantLSStepSize
 from ..model import Model
 from ..preconditioner import Preconditioner, IdentityPreconditioner
 from ..update import LSUpdate
@@ -104,7 +104,7 @@ class AdamUpdate(LSUpdate):
             direction=AdamLSDirection(
                 beta_1, beta_2, epsilon, relative_epsilon, verbose=verbose
             ),
-            stepsize=ConstantLSStepsize(alpha),
+            step_size=ConstantLSStepSize(alpha),
             verbose=verbose,
         )
         self.preconditioner = get_instance(preconditioner)
@@ -119,7 +119,7 @@ class AdamUpdate(LSUpdate):
             Model: The next (updated) model
         """
         p = self.preconditioner(self.direction(m))
-        return self.stepsize(m, p)
+        return self.step_size(m, p)
 
     def store_attributes(
         self, state_file: Union[pathlib.Path, str, None] = None

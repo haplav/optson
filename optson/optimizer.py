@@ -91,7 +91,7 @@ class Optimizer:
     def _store_state(self, m: Model) -> None:
         """
         Stores a model on disk. Always overwrites existing models.
-        This allows the iterate function to contiue iterating from where it previously stopped.
+        This allows the iterate function to continue iterating from where it previously stopped.
         """
         if not self.state_file:
             return

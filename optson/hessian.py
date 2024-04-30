@@ -105,7 +105,7 @@ class Hessian(ABC):
 @class_method_call_counter
 class LBFGSHessian(Hessian):
     """
-    Implementation of the L-BFGS algorithm.
+    Implementation of the LBFGS algorithm.
     (see e.g.: https://en.wikipedia.org/wiki/Limited-memory_BFGS)
 
     Args:
@@ -186,7 +186,7 @@ class LBFGSHessian(Hessian):
                 self.rho = deque(f["LBFGS"]["rho"][:])
 
     def update(self, s_update: Vec, y_update: Vec) -> bool:
-        """Update the L-BFGS history
+        """Update the LBFGS history
 
         Args:
             s_update (Vec): Model difference
@@ -205,7 +205,7 @@ class LBFGSHessian(Hessian):
         if d_s_y <= 0.0:
             if self.verbose:
                 print("Curvature condition not satisfied")
-                print("No vectors were added, and the L-BFGS history has been reset.")
+                print("No vectors were added, and the LBFGS history has been reset.")
             return False
         rho = 1.0 / d_s_y
 
@@ -296,7 +296,7 @@ class LBFGSHessian(Hessian):
         return as_vec(Hk_v - gam_1 * Hk_sk + gam_2 * self.Y[i])
 
     def reset(self) -> None:
-        """Reset the L-BFGS history."""
+        """Reset the LBFGS history."""
         self.currently_stored_vectors = 0
         self.S = deque()
         self.Y = deque()

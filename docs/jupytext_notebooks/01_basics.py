@@ -60,7 +60,7 @@ class SimpleQuadratic2D(Problem):
 # Optson has the built-in option to perform a gradient test.
 # This tests if ``g`` is
 # the actual gradient of ``f`` by comparing changes in ``f`` by predictions based on ``g``.
-# If everything is fine, relative errors should be small and the curve should have the shape of a hockeystick.
+# If everything is fine, relative errors should be small and the curve should have the shape of a hockey stick.
 
 # %%
 # a list of perturbations to compare predicted changes in f with actual changes in f.
@@ -72,10 +72,10 @@ gt.plot()
 # %% [markdown]
 # ## 3. Calling the Optimizer
 # We can then proceed to perform the optimization. For this purpose, we import [`Optimizer`](optson.optimizer.Optimizer).
-# The optimizer can be initalized with settings that define the update rules and stopping criteria.
+# The optimizer can be initialized with settings that define the update rules and stopping criteria.
 # By default, it uses [`BasicTRUpdate`](optson.methods.trust_region.BasicTRUpdate)
 # to perform model updates, which is a trust-region approach
-# that uses L-BFGS to approximate the Hessian.
+# that uses LBFGS to approximate the Hessian.
 
 # %%
 pb = SimpleQuadratic2D()

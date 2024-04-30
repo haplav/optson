@@ -113,7 +113,7 @@ class EmptyBatchManager(BatchManager):
     """An empty batch manager. Using this batch manager will instruct **Optson** to use non-stochastic optimization methods."""
 
     def update(self, iteration: int) -> Tuple[Optional[List[int]], List[int]]:
-        """Udpate the batch manager.
+        """Update the batch manager.
 
         Args:
             iteration (int): The iteration number.
@@ -176,7 +176,7 @@ class EmptyBatchManager(BatchManager):
 
     @property
     def stochastic(self) -> bool:
-        """Property that indicates whether the batch manager is used for stochastic optimzation.
+        """Property that indicates whether the batch manager is used for stochastic optimization.
 
         Returns:
             bool: Just `False` in this case.
@@ -223,7 +223,7 @@ class SimpleBatchManager(BatchManager):
     def extend_control_group(self, iteration: int) -> bool:
         raise ValueError(
             "Control groups are not defined in the context of the SimpleBatchManager. "
-            "If youw use methods that rely on trust-region or line-search techniques, "
+            "If you use methods that rely on trust-region or line-search techniques, "
             "please use a different BatchManager."
         )
 

@@ -7,7 +7,7 @@ from typing import Union
 
 import h5py
 
-from .ls import LSDirection, LSStepsize
+from .ls import LSDirection, LSStepSize
 from .model import Model
 from .tr import TRRadius, TRStep
 from .vector import Vec, dot, norm
@@ -54,7 +54,7 @@ class Update(ABC):
 
     @property
     def needs_H(self) -> bool:
-        """Property that informs `Model` if the Hessian needs to be updated, as is for example the case in L-BFGS.
+        """Property that informs `Model` if the Hessian needs to be updated, as is for example the case in LBFGS.
         This defaults to true if not defined by the derived class.
 
         Returns:
@@ -68,18 +68,18 @@ class LSUpdate(Update):
 
     Args:
         direction (LSDirection): The algorithm that defines the search direction.
-        stepsize (LSStepsize): The algorithm that defines the step sizes.
+        step_size (LSStepSize): The algorithm that defines the step sizes.
         verbose (bool, optional): Verbosity. Defaults to False.
     """
 
     def __init__(
         self,
         direction: LSDirection,
-        stepsize: LSStepsize,
+        step_size: LSStepSize,
         verbose: bool = False,
     ):
         self.direction = direction
-        self.stepsize = stepsize
+        self.step_size = step_size
         self.verbose = verbose
 
     def __call__(self, m: Model) -> Model:
@@ -92,7 +92,7 @@ class LSUpdate(Update):
             Model: The updated model.
         """
         p = self.direction(m)
-        return self.stepsize(m, p)
+        return self.step_size(m, p)
 
     def store_attributes(
         self, state_file: Union[pathlib.Path, str, None] = None
@@ -103,8 +103,11 @@ class LSUpdate(Update):
         with h5py.File(state_file, "a") as f:
             if "LineSearch" not in f.keys():
                 f.create_group("LineSearch")
-            if hasattr(self.stepsize, "current") and self.stepsize.current is not None:
-                f["LineSearch"].attrs["current"] = self.stepsize.current
+            if (
+                hasattr(self.step_size, "current")
+                and self.step_size.current is not None
+            ):
+                f["LineSearch"].attrs["current"] = self.step_size.current
 
     def get_attributes(
         self, target_vec: Vec, state_file: Union[pathlib.Path, str, None] = None
@@ -114,7 +117,7 @@ class LSUpdate(Update):
 
         with h5py.File(state_file, "r") as f:
             if "LineSearch" in f.keys() and "current" in f["LineSearch"].attrs:
-                self.stepsize.current = f["LineSearch"].attrs["current"]
+                self.step_size.current = f["LineSearch"].attrs["current"]
 
 
 class TRUpdate(Update):

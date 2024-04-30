@@ -33,7 +33,7 @@ class LSDirection(ABC):
         raise NotImplementedError()
 
 
-class LSStepsize(ABC):
+class LSStepSize(ABC):
     """Abstract base class for line-search algorithms.
 
     Args:
@@ -173,7 +173,7 @@ class QuasiNewtonLSDirection(LSDirection):
         return p
 
 
-class ConstantLSStepsize(LSStepsize):
+class ConstantLSStepSize(LSStepSize):
     def __init__(
         self,
         initial: float = 1e-3,
@@ -207,7 +207,7 @@ class ConstantLSStepsize(LSStepsize):
         return m.new(x=m.x + alpha * p).accept()
 
 
-class BacktrackingLSStepsize(LSStepsize):
+class BacktrackingLSStepSize(LSStepSize):
     def __init__(
         self,
         max_iterations: int = 100,
@@ -228,7 +228,7 @@ class BacktrackingLSStepsize(LSStepsize):
                 Defaults to False.
             verbose (bool, optional): Verbosity. Defaults to False.
             rho (float, optional): Determines how quickly back-tracking occurs. Defaults to 0.5.
-            c1 (float, optional): The constant for the sufficient decrease condtion or Wolfe I. Defaults to 1e-4.
+            c1 (float, optional): The constant for the sufficient decrease condition or Wolfe I. Defaults to 1e-4.
         """
         super().__init__(
             max_iterations=max_iterations,
@@ -317,7 +317,7 @@ class BacktrackingLSStepsize(LSStepsize):
         )
 
 
-class ScalarOptimizerLSStepsize(LSStepsize):
+class ScalarOptimizerLSStepSize(LSStepSize):
     def __init__(
         self,
         max_iterations: int = 100,

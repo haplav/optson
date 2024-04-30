@@ -69,8 +69,6 @@ class BasicTRRadius(TRRadius):
 
         This function decides whether a model gets accepted or not. In addition,
         it either shrinks or grows the trust-region radius.
-        ared: actual reduction of misfit for the control group
-        pred: predicted reduction of misfit for the control group
         """
         self.__call__()
         P = m._problem.preconditioner

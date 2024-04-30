@@ -36,7 +36,7 @@ class RegressionProblem(Problem):
         super().__init__()
         self.n_samples = n_samples
         self.random_seed = random_seed
-        self.x, self.y, self.coeff = make_regression(
+        self.x, self.y, self.coef = make_regression(
             n_samples=n_samples,
             n_features=n_features,
             n_informative=n_informative,

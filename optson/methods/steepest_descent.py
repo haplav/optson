@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from ..ls import LSStepsize, BacktrackingLSStepsize, SteepestDescentLSDirection
+from ..ls import LSStepSize, BacktrackingLSStepSize, SteepestDescentLSDirection
 from ..update import LSUpdate
 from ..utils import InstanceOrType, get_instance
 
@@ -15,8 +15,8 @@ class SteepestDescentUpdate(LSUpdate):
         max_step_size (float, optional): The maximum step size. Defaults to float("inf").
         max_iterations (int, optional): The maximum number of iterations in the line-search. Defaults to 100.
         initial_step_as_percentage (bool, optional): Initial step as a percentage of the model. Defaults to False.
-        stepsize (InstanceOrType[LSStepsize], optional): A step size algorithm.
-            Defaults to :class:`~optson.ls.BacktrackingLSStepsize`.
+        step_size (InstanceOrType[LSStepSize], optional): A step size algorithm.
+            Defaults to :class:`~optson.ls.BacktrackingLSStepSize`.
         verbose (bool, optional): Verbosity. Defaults to False.
     """
 
@@ -26,13 +26,13 @@ class SteepestDescentUpdate(LSUpdate):
         max_step_size: float = float("inf"),
         max_iterations: int = 100,
         initial_step_as_percentage: bool = False,
-        stepsize: InstanceOrType[LSStepsize] = BacktrackingLSStepsize,
+        step_size: InstanceOrType[LSStepSize] = BacktrackingLSStepSize,
         verbose: bool = False,
     ):
         super().__init__(
             direction=SteepestDescentLSDirection(verbose=verbose),
-            stepsize=get_instance(
-                stepsize,
+            step_size=get_instance(
+                step_size,
                 max_iterations=max_iterations,
                 initial=initial_step_size,
                 max_step_size=max_step_size,

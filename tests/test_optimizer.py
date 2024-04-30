@@ -5,7 +5,11 @@ from typing import Type
 import numpy as np
 import pytest
 
-from optson.batch_manager import ControlGroupBatchManager, EmptyBatchManager
+from optson.batch_manager import (
+    BatchManager,
+    ControlGroupBatchManager,
+    EmptyBatchManager,
+)
 from optson.call_counter import get_method_count
 from optson.methods import (
     AdamUpdate,
@@ -114,16 +118,17 @@ def test_cache(update_cls: Type[Update], problem_cls: Type[Problem]) -> None:
     else:
         x0 = np.array([2.0, 2.0])
 
+    batch_manager_cls: Type[BatchManager]
     if isinstance(prob, RegressionProblem):
-        batch_manager = ControlGroupBatchManager
+        batch_manager_cls = ControlGroupBatchManager
     else:
-        batch_manager = EmptyBatchManager
+        batch_manager_cls = EmptyBatchManager
 
     opt = Optimizer(
         problem=prob,
         state_file=state_file,
         update=update_cls,
-        batch_manager=batch_manager,
+        batch_manager=batch_manager_cls,
     )
     opt.stopping_criterion.max_iterations = 3
     m_cache = opt.iterate(x0=x0.copy())
@@ -135,13 +140,17 @@ def test_cache(update_cls: Type[Update], problem_cls: Type[Problem]) -> None:
         problem=prob,
         state_file=state_file,
         update=update_cls,
-        batch_manager=batch_manager,
+        batch_manager=batch_manager_cls,
     )
     opt.stopping_criterion.max_iterations = 4
     m_cache = opt.iterate(x0=x0.copy())
 
     # Compare to solution without cache
-    opt = Optimizer(problem=problem_cls, update=update_cls, batch_manager=batch_manager)
+    opt = Optimizer(
+        problem=problem_cls,
+        update=update_cls,
+        batch_manager=batch_manager_cls,
+    )
     opt.stopping_criterion.max_iterations = 4
     m_no_cache = opt.iterate(x0=x0.copy())
     np.testing.assert_array_almost_equal(m_no_cache.x, m_cache.x)

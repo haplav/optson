@@ -15,7 +15,7 @@ from numpy.linalg import norm
 
 from optson.call_counter import class_method_call_counter, get_method_count
 from optson.gradient_test import GradientTest
-from optson.ls import ScalarOptimizerLSStepsize
+from optson.ls import ScalarOptimizerLSStepSize
 from optson.methods import AdamUpdate, SteepestDescentUpdate, BasicTRUpdate
 from optson.model import Model, ModelProxy
 from optson.monitor import BasicMonitor
@@ -55,7 +55,7 @@ class Himmelblau(Problem):
 # %% [markdown]
 # ## Gradient Testing the problem
 # Here, we confirm that we implemented our problem correctly. If we did things correctly the gradient
-# test should give us a curve that looks roughly like a hockeystick with small relative errors.
+# test should give us a curve that looks roughly like a hockey stick with small relative errors.
 # %%
 h = np.logspace(-15, 2, 50)
 gt = GradientTest(x0=np.array([4, 4]), h=h, problem=Himmelblau())
@@ -65,7 +65,7 @@ gt.plot()
 # %% [markdown]
 # All looks well!
 #
-# We now implement a convencience function to help us plot our results.
+# We now implement a convenience function to help us plot our results.
 
 
 # %% Solving the problem
@@ -116,7 +116,7 @@ solve_and_plot(x0=[4.0, 4.0], update=SteepestDescentUpdate)
 
 # %%
 solve_and_plot(
-    x0=[4.0, 4.0], update=SteepestDescentUpdate(stepsize=ScalarOptimizerLSStepsize)
+    x0=[4.0, 4.0], update=SteepestDescentUpdate(step_size=ScalarOptimizerLSStepSize)
 )
 
 # %% [markdown]

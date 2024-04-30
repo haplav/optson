@@ -51,7 +51,7 @@ def get_type(arr: InVec, fail: bool = True) -> EVecType:
         fail (bool, optional): Fail if unknown type is passed. Defaults to True.
 
     Returns:
-        EVecType: The EvecType value corresponding to the input array.
+        EVecType: The EVecType value corresponding to the input array.
     """
     if isinstance(arr, np.ndarray):
         t = EVecType.NUMPY
@@ -104,12 +104,12 @@ def dot(a: Vec, b: Vec) -> Scalar:
         Scalar: The resulting value.
     """
     assert a.shape == b.shape, f"{a.shape}, {b.shape}"
-    ndim = len(a.shape)
+    nDim = len(a.shape)
     f: Callable[..., Scalar]
     a_type, b_type = get_type(a), get_type(b)
     if a_type != b_type:
         raise TypeError("Inputs must be of the same type")
-    if ndim == 1:
+    if nDim == 1:
         if a_type == EVecType.TORCH:
             f = torch.dot
         elif a_type == EVecType.JAX:
@@ -118,11 +118,11 @@ def dot(a: Vec, b: Vec) -> Scalar:
             f = np.dot
     else:
         if a_type == EVecType.TORCH:
-            f = partial(torch.tensordot, dims=ndim)
+            f = partial(torch.tensordot, dims=nDim)
         elif a_type == EVecType.JAX:
-            f = partial(jnp.tensordot, axes=ndim)
+            f = partial(jnp.tensordot, axes=nDim)
         else:
-            f = partial(np.tensordot, axes=ndim)
+            f = partial(np.tensordot, axes=nDim)
     assert f is not None
     return f(a, b)
 
@@ -190,7 +190,7 @@ def zeros_like(arr: Vec) -> Vec:
 
 
 def norm(a: Vec) -> float:
-    """Returns the Euclidian norm of an array.
+    """Returns the Euclidean norm of an array.
 
     Args:
         a (Vec): The array.

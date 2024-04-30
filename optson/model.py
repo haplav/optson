@@ -87,7 +87,7 @@ class ModelProxy:
 @dataclass(frozen=True)
 class Model(ModelProxy):
     """The model class. This frozen data class holds the current model vector
-    and metainformation. In addition, it caches important things such as the gradient
+    and meta-information. In addition, it caches important things such as the gradient
     and function values.
 
     Args:

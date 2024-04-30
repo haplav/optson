@@ -33,7 +33,7 @@ class StoppingCriterion(ABC):
     @abstractmethod
     def get_conditions(self, m: Model) -> Iterator[Tuple[bool, str]]:
         """
-        An iterator over tuples, each with a stopping criterium and a human-readable message.
+        An iterator over tuples, each with a stopping criterion and a human-readable message.
 
         Args:
             m (Model): The model.
