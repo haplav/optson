@@ -16,6 +16,7 @@ dependencies:
   - pytest-cov
   - mypy=1.10.0
   - flake8=7.0.0
+  - flake8-pyproject
   - black=24.4.2
   - jupyter
   - jupytext
