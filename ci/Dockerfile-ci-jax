@@ -1,6 +1,0 @@
-FROM optson:ci
-ARG MAMBA_DOCKERFILE_ACTIVATE=1
-RUN micromamba install --yes --name base --channel conda-forge \
-      jax \
-      jaxlib && \
-    micromamba clean --all --yes
