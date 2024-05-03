@@ -9,26 +9,31 @@ from typing import Any, Callable, Deque, Sequence, Union
 import numpy as np
 import numpy.typing
 
+_NDArray = numpy.typing.NDArray[np.floating]
+_Tensor = Any
+_Array = Any
+
 try:
     import torch
+    from torch import Tensor as _Tensor  # type: ignore[no-redef]
 
     TORCH_AVAIL = True
 except ImportError:
     TORCH_AVAIL = False
 
 try:
-    import jax
     import jax.numpy as jnp
+    from jax import Array as _Array  # type: ignore[no-redef]
 
     JAX_AVAIL = True
 except ImportError:
     JAX_AVAIL = False
 
-#: A float or 1D scalar
-Scalar = Union[float, numpy.typing.NDArray[np.floating], "torch.Tensor", "jax.Array"]
-
 #: Vec
-Vec = Union[numpy.typing.NDArray[np.floating], "torch.Tensor", "jax.Array"]
+Vec = Union[_NDArray, _Tensor, _Array]
+
+#: A float or 1D scalar
+Scalar = Union[Vec, float]
 
 #: InVec
 InVec = Union[Vec, Sequence[float]]
