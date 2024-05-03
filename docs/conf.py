@@ -16,7 +16,7 @@ import sys
 import pathlib
 import jupytext  # type: ignore
 
-sys.path.insert(0, os.path.abspath("../../optson"))
+sys.path.insert(0, os.path.abspath(".."))
 
 SCRIPT_DIR = pathlib.Path(__file__).parent
 MODULE_DIR = SCRIPT_DIR.parent / "optson"
@@ -57,8 +57,8 @@ extensions = [
     "myst_nb",  # Markdown instead of RST and ipynb notebook reading.
     # docstrings
     "sphinx.ext.napoleon",  # Support for Google-style docstrings.
-    # "sphinx_autodoc_typehints", # additional support for type hints
-    # "sphinx_toolbox.more_autodoc.typevars", # may be interesting to use
+    "sphinx_autodoc_typehints",  # additional support for type hints
+    "sphinx_toolbox.more_autodoc.typevars",  # Documenter for module level typing.TypeVar's
 ]
 
 # Add any paths that contain templates here, relative to this directory.

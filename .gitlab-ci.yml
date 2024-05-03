@@ -80,11 +80,12 @@ salvus-deps:
 test-pages:
   extends: .mr_job
   stage: stage2
+  image: $CI_REGISTRY_IMAGE:ci-jax-pytorch
   except:
       refs:
       - main
   script:
-    - pip install -v -e ".[docs]"
+    - pip install -v -e ".[docs,jax,torch]"
     - cd docs && pwd && ls -l conf.py
     - sphinx-apidoc -o api ../optson -f -H "API Reference" -e
     - sphinx-build -M html . _build -T -W
@@ -108,11 +109,12 @@ test-pages-without-pytest:
 pages:
   extends: .mr_job
   stage: stage2
+  image: $CI_REGISTRY_IMAGE:ci-jax-pytorch
   only:
     refs:
       - main
   script:
-    - pip install -v -e ".[docs]"
+    - pip install -v -e ".[docs,jax,torch]"
     - cd docs && pwd && ls -l conf.py
     - sphinx-apidoc -o api ../optson -f -H "API Reference" -e
     - sphinx-build -M html . _build -T -W

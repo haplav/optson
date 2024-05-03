@@ -21,9 +21,10 @@ dependencies:
   - jupyter
   - jupytext
   - sphinx
+  - sphinx-autodoc-typehints
+  - sphinx-toolbox
+  - docutils=0.18.1
   - make
-  - arrow
-  - jinja2-time
   - pip
   - pip:
       - myst_nb

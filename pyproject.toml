@@ -33,8 +33,9 @@ tutorials = ["ipympl", "scikit-learn"]
 jax = ["jax", "jaxlib"] # Support for Jax.Arrays
 torch = ["torch"] # Support for Torch.Tensor
 test = ["optson[tutorials]", "pytest", "pytest-cov", "mypy", "flake8"]
-docs = ["sphinx", "myst_nb", "sphinx_book_theme", "make"]
-all = ["optson[ci, jax, torch]"]
+docs = ["sphinx", "myst_nb", "sphinx-autodoc-typehints", "sphinx_book_theme", "sphinx-toolbox"]
+all = ["optson[tutorials, jax, torch]"]
+dev = ["optson[tutorials, jax, torch, test, docs]"]
 
 [tool.versioneer]
 VCS = "git"
