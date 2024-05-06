@@ -55,23 +55,15 @@ pytest:
     - run_pytest
   coverage: '/(?i)total.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/'
 
-jax:
+pytest-jax-pytorch:
   extends: pytest
-  image: $CI_REGISTRY_IMAGE:ci-jax
+  image: $CI_REGISTRY_IMAGE:ci-jax-pytorch
   script:
     - source ci/test-commons.sh
-    - pip install -v -e ".[test,jax]"
+    - pip install -v -e ".[test,jax,torch]"
     - run_pytest
 
-torch:
-  extends: pytest
-  image: $CI_REGISTRY_IMAGE:ci-torch
-  script:
-    - source ci/test-commons.sh
-    - pip install -v -e ".[test,torch]"
-    - run_pytest
-
-salvus-deps:
+pytest-salvus-deps:
   extends: pytest
   image: $CI_REGISTRY_IMAGE:ci-salvus-deps
   variables:
@@ -80,11 +72,12 @@ salvus-deps:
 test-pages:
   extends: .mr_job
   stage: stage2
+  image: $CI_REGISTRY_IMAGE:ci-jax-pytorch
   except:
       refs:
       - main
   script:
-    - pip install -v -e ".[docs]"
+    - pip install -v -e ".[docs,jax,torch]"
     - cd docs && pwd && ls -l conf.py
     - sphinx-apidoc -o api ../optson -f -H "API Reference" -e
     - sphinx-build -M html . _build -T -W
@@ -108,11 +101,12 @@ test-pages-without-pytest:
 pages:
   extends: .mr_job
   stage: stage2
+  image: $CI_REGISTRY_IMAGE:ci-jax-pytorch
   only:
     refs:
       - main
   script:
-    - pip install -v -e ".[docs]"
+    - pip install -v -e ".[docs,jax,torch]"
     - cd docs && pwd && ls -l conf.py
     - sphinx-apidoc -o api ../optson -f -H "API Reference" -e
     - sphinx-build -M html . _build -T -W

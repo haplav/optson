@@ -6,9 +6,9 @@ channels:
   - defaults
 dependencies:
   - python=3.9
-  - numpy
   - h5py
-  - ipython
   - ipympl
+  - ipython
   - matplotlib
+  - numpy
   - scikit-learn

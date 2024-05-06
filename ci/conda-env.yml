@@ -6,25 +6,26 @@ channels:
   - defaults
 dependencies:
   - python=3.9
-  - numpy
-  - h5py
-  - ipython
-  - ipympl
-  - matplotlib
-  - scikit-learn
-  - pytest=7.4.0
-  - pytest-cov
-  - mypy=1.10.0
+  - black=24.4.2
+  - docutils=0.18.1
   - flake8=7.0.0
   - flake8-pyproject
-  - black=24.4.2
+  - h5py
+  - ipympl
+  - ipython
   - jupyter
   - jupytext
-  - sphinx
   - make
-  - arrow
-  - jinja2-time
+  - matplotlib
+  - mypy=1.10.0
+  - numpy
   - pip
+  - pytest=7.4.0
+  - pytest-cov
+  - scikit-learn
+  - sphinx
+  - sphinx-autodoc-typehints
+  - sphinx-toolbox
   - pip:
       - myst_nb
       - sphinx_book_theme
