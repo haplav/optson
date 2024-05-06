@@ -55,7 +55,7 @@ pytest:
     - run_pytest
   coverage: '/(?i)total.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/'
 
-jax-pytorch:
+pytest-jax-pytorch:
   extends: pytest
   image: $CI_REGISTRY_IMAGE:ci-jax-pytorch
   script:
@@ -63,7 +63,7 @@ jax-pytorch:
     - pip install -v -e ".[test,jax,torch]"
     - run_pytest
 
-salvus-deps:
+pytest-salvus-deps:
   extends: pytest
   image: $CI_REGISTRY_IMAGE:ci-salvus-deps
   variables:
