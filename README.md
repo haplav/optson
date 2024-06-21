@@ -14,9 +14,12 @@ perform optimization according to the specified settings.
 
 Full documentation: https://swp_ethz.gitlab.io/optson
 
+Note that the main repository resides on GitLab: https://gitlab.com/swp_ethz/optson.
+This is where we run our CI.
+
 ## Installation
 * Make sure you have an environment with Python version 3.9 or higher.  
-  However, you can use our Conda environment files for that, mentioned below.
+  However, you can use our Conda environment files for that, as mentioned below.
 * Clone this repository and change to the resulting directory.
 * To install just minimal dependencies run:
   ```
